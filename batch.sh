@@ -10,10 +10,10 @@ fi
 for f in $1/*; do
     if [ -d "$f" ]; then
         printf "$f\n\n"
-        python3 livros_35.py $f rename-images
-        python3 livros_35.py $f apply-images-orientation
-        python3 livros_35.py $f make-cover
-        python3 livros_35.py $f print-image-urls --base-url $BASE_URL
+        python3 livros_35.py rename-images $f
+        python3 livros_35.py apply-images-orientation $f
+        python3 livros_35.py make-cover $f
+        python3 livros_35.py print-image-urls --base-url $BASE_URL $f
     fi
     printf "\n"
 done

@@ -11,7 +11,6 @@ from wand.image import Image
 DEFAULT_IMAGE_SEQUENCE_START = 2
 
 parser = argparse.ArgumentParser()
-parser.add_argument("folder", type=Path)
 
 subparsers = parser.add_subparsers(required=True, dest="action")
 
@@ -28,6 +27,8 @@ print_image_urls_parser = subparsers.add_parser("print-image-urls")
 print_image_urls_parser.add_argument("--base-url", required=True)
 
 apply_images_orientation_parser = subparsers.add_parser("apply-images-orientation")
+
+parser.add_argument("folder", type=Path)
 
 
 def rename_images(folder, sequence_start=DEFAULT_IMAGE_SEQUENCE_START):
