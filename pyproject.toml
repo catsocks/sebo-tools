@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "livros-35"
+version = "0.1.0"
+description = ""
+authors = ["catsocks <3389801+catsocks@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+removebg = { git = "https://github.com/brilam/remove-bg.git", rev = "d01e21b"  }
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
