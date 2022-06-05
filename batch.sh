@@ -9,7 +9,7 @@ fi
 # Loop through all the subfolders of a given folder.
 for f in $1/*; do
     if [ -d "$f" ]; then
-        printf "$f\n"
+        printf "$f\n\n"
         python3 livros_35.py $f rename-images
         python3 livros_35.py $f make-cover
         python3 livros_35.py $f print-image-urls --base-url $BASE_URL
