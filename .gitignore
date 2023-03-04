@@ -1,0 +1,11 @@
+# Poetry
+dist/
+
+# Pytest
+.pytest_cache
+
+# Ruff
+.ruff_cache
+
+# Coverage.py
+.coverage
