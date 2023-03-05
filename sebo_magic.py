@@ -4,6 +4,7 @@ import click
 import wand.image
 from rembg import remove
 from wand.image import Image
+from natsort import natsorted
 
 
 @click.group(chain=True)
@@ -25,7 +26,7 @@ def cli(ctx, folder, suffixes):
 @click.option("--sequence-start", default=2, show_default=True)
 @click.pass_context
 def rename_files(ctx, sequence_start):
-    """Rename files according to the lexographical order of their filenames in each
+    """Rename files according to the natural sort order of their filenames in each
     folder, starting from the value of '--sequence-start'."""
 
     files = []
@@ -34,7 +35,7 @@ def rename_files(ctx, sequence_start):
             files.append(path)
 
     folders = {}
-    for path in sorted(files):  # sorted lexographically
+    for path in natsorted(files):  # natural sort order
         if path.parent not in folders:
             folders[path.parent] = []
         folders[path.parent].append(path)
