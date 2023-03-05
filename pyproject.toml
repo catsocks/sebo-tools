@@ -8,17 +8,17 @@ packages = [{include = "sebo_magic.py"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.11"
-Wand = "^0.6.11"
-click = "^8.1.3"
-rembg = "^2.0.30"
-natsort = "^8.3.1"
+Wand = "^0.6.11" # ImageMagick bindings
+click = "^8.1.3" # CLI framework
+rembg = "^2.0.30" # image background removal 
+natsort = "^8.3.1" # natural sort order version of built-in sorted
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0" # code formatter
 ruff = "^0.0.253" # linter
 poethepoet = "^0.18.1" # task runner
 pytest = "^7.2.2"
-coverage = "^7.2.1"
+coverage = "^7.2.1" # code coverage
 isort = "^5.12.0" # sort imports
 
 [tool.poetry.scripts]
