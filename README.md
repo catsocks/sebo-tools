@@ -12,10 +12,8 @@ Assuming you've taken photos of many products, grouped them into folders, and wa
 | --- | --- |
 | rename-files | Rename the photos according to the natural sort order of their filenames in each folder. |
 | normalize-images | Normalize the format, maximum resolution, and rotation of the photos. |
-| create-cover-images | Automatically create a product cover photo based off an image from each folder. |
+| create-cover-images | Automatically create a product cover photo based off of an image from each folder. |
 | count-files | Print the number of photos in each folder in a spreadsheet-friendly way (i.e. using tab separated values). |
-
-All the commands above work recursively on a folder tree.
 
 For more details, have a look at [sebo_magic.py](sebo_magic.py) and [test_sebo_magic.py](tests/test_sebo_magic.py).
 
@@ -35,7 +33,7 @@ Commands:
   count-files          Print the number of files that match the given...
   create-cover-images  Remove the background of, and resize if necessary,...
   normalize-images     Normalize the format, maximum resolution, and...
-  rename-files         Rename files according to the lexographical order...
+  rename-files         Rename files according to the natural sort order...
 ```
 
 ## TODO
