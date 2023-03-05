@@ -27,7 +27,8 @@ def test_rename_images(data_path):
     assert (data_path / "book-a" / "book-d" / "2.jpg").exists()
     assert (data_path / "book-a" / "book-d" / ".DS_Store").exists()
     assert (data_path / "book-b" / "2.jpg").exists()
-    assert (data_path / "book-b" / "3.heic").exists()
+    assert (data_path / "book-b" / "3.jpg").exists()
+    assert (data_path / "book-b" / "4.heic").exists()
 
 
 def test_normalize_images(data_path):
@@ -50,7 +51,7 @@ def test_count_files(data_path):
     runner = CliRunner()
     result = runner.invoke(cli, [str(data_path), "count-files"])
     assert result.exit_code == 0
-    assert result.output == ("book-a\t1\n" "book-a\\book-d\t1\n" "book-b\t2\n")
+    assert result.output == ("book-a\t1\n" "book-a\\book-d\t1\n" "book-b\t3\n")
 
 
 def test_all_chained(data_path):
@@ -73,3 +74,4 @@ def test_all_chained(data_path):
     assert (data_path / "book-b" / "1.png").exists()
     assert (data_path / "book-b" / "2.jpg").exists()
     assert (data_path / "book-b" / "3.jpg").exists()
+    assert (data_path / "book-b" / "4.jpg").exists()

@@ -41,7 +41,7 @@ def rename_files(ctx, sequence_start):
         folders[path.parent].append(path)
 
     for folder in folders:
-        for i, path in enumerate(folders[folder]):
+        for i, path in reversed(list(enumerate(folders[folder]))):
             new_stem = str(i + sequence_start)
             path.replace(path.with_stem(new_stem))
 
