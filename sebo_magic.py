@@ -25,18 +25,19 @@ def cli(ctx, folder, suffixes):
 @click.option("--sequence-start", default=2, show_default=True)
 @click.pass_context
 def rename_files(ctx, sequence_start):
-    """Rename files according to the alphabetical order of their filenames in each
+    """Rename files according to the lexographical order of their filenames in each
     folder, starting from the value of '--sequence-start'."""
 
     files = []
     for path in ctx.obj["folder"].rglob("*"):
-        if path.is_file and path.suffix in ctx.obj["suffixes"]:
+        if path.is_file() and path.suffix in ctx.obj["suffixes"]:
             files.append(path)
 
     folders = {}
-    for path in sorted(files):  # sorted alphabetically
-        if path.is_file():
-            folders[path.parent] = folders.get(path.parent, []) + [path]
+    for path in sorted(files):  # sorted lexographically
+        if path.parent not in folders:
+            folders[path.parent] = []
+        folders[path.parent].append(path)
 
     for folder in folders:
         for i, path in enumerate(folders[folder]):

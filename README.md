@@ -10,7 +10,7 @@ Assuming you've taken photos of many products, grouped them into folders, and wa
 
 | Command | Description |
 | --- | --- |
-| rename-files | Rename the photos according to the alphabetical order of their filenames in each folder. |
+| rename-files | Rename the photos according to the lexographical order of their filenames in each folder. |
 | normalize-images | Normalize the format, maximum resolution, and rotation of the photos. |
 | create-cover-images | Automatically create a product cover photo based off an image from each folder. |
 | count-files | Print the number of photos in each folder in a spreadsheet-friendly way (i.e. using tab separated values). |
@@ -35,11 +35,13 @@ Commands:
   count-files          Print the number of files that match the given...
   create-cover-images  Remove the background of, and resize if necessary,...
   normalize-images     Normalize the format, maximum resolution, and...
-  rename-files         Rename files according to the alphabetical order...
+  rename-files         Rename files according to the lexographical order...
 ```
 
 ## TODO
 
+* [ ] Use natural sort order for sorting files.
+* [ ] Add `--verbose` option.
 * [ ] Use a simpler alternative to [rembg](https://github.com/danielgatis/rembg).
 * [ ] Add command for grouping photos of the same object into folders.
 * [ ] Add command for scraping the text contents of all the photos.
