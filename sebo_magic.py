@@ -26,8 +26,8 @@ def cli(ctx, folder, suffixes):
 @click.option("--sequence-start", default=2, show_default=True)
 @click.pass_context
 def rename_files(ctx, sequence_start):
-    """Rename files according to the natural sort order of their filenames in each
-    folder, starting from the value of '--sequence-start'."""
+    """Rename the photos using a sequence of numbers based on the natural sort order
+    of their filenames, starting from the value of '--sequence-start'."""
 
     files = []
     for path in ctx.obj["folder"].rglob("*"):

@@ -1,6 +1,7 @@
 # Sebo Magic
 
-A collection of small tools for managing photos of products.
+A collection of small tools for managing photos of products that I made for
+myself.
 
 _Sebo_ stands for second-hand book shop in Portuguese.
 
@@ -10,7 +11,7 @@ Assuming you've taken photos of many products, grouped them into folders, and wa
 
 | Command | Description |
 | --- | --- |
-| rename-files | Rename the photos according to the natural sort order of their filenames in each folder. |
+| rename-files | Rename the photos using a sequence of numbers based on the natural sort order of their filenames. |
 | normalize-images | Normalize the format, maximum resolution, and rotation of the photos. |
 | create-cover-images | Automatically create a product cover photo based off of an image from each folder. |
 | count-files | Print the number of photos in each folder in a spreadsheet-friendly way (i.e. using tab separated values). |
