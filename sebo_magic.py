@@ -2,9 +2,9 @@ from pathlib import Path
 
 import click
 import wand.image
+from natsort import natsorted
 from rembg import remove
 from wand.image import Image
-from natsort import natsorted
 
 
 @click.group(chain=True)
@@ -25,8 +25,8 @@ def cli(ctx, folder, suffixes):
 @cli.command()
 @click.option("--sequence-start", default=2, show_default=True)
 @click.pass_context
-def rename_files(ctx, sequence_start):
-    """Rename the photos using a sequence of numbers based on the natural sort order
+def rename(ctx, sequence_start):
+    """Rename the files using a sequence of numbers based on the natural sort order
     of their filenames, starting from the value of '--sequence-start'."""
 
     files = []
@@ -64,7 +64,7 @@ def rename_files(ctx, sequence_start):
 )
 @click.option("-f", "--force", is_flag=True)
 @click.pass_context
-def normalize_images(ctx, format, max_resolution, auto_orient, force):
+def normalize(ctx, format, max_resolution, auto_orient, force):
     """Normalize the format, maximum resolution, and rotation of images.
 
     If a image fits the given normalization criteria, the function will not overwrite it
@@ -103,9 +103,10 @@ def normalize_images(ctx, format, max_resolution, auto_orient, force):
 @click.option("--max-resolution", default="1280x1280", show_default=True)
 @click.option("-f", "--force", is_flag=True)
 @click.pass_context
-def create_cover_images(ctx, input, output, max_resolution, force):
+def create_cover(ctx, input, output, max_resolution, force):
     """Remove the background of, and resize if necessary, the images that match the
-    given input path in each folder, saving them at the given output path.
+    given input path, saving them at the given output path relative to the folder
+    they're in.
 
     If the output file already exists, the function will not overwrite it unless the
     '--force' flag is set.
@@ -131,8 +132,9 @@ def create_cover_images(ctx, input, output, max_resolution, force):
 @cli.command()
 @click.option("--separator", default="\t")
 @click.pass_context
-def count_files(ctx, separator):
-    """Print the number of files that match the given suffixes for each folder."""
+def count(ctx, separator):
+    """Print the number of files for each folder. Only files whose suffix match
+    '--suffixes' are counted."""
 
     base_folder = ctx.obj["folder"]
     folders = {}

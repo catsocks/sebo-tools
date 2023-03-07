@@ -1,7 +1,7 @@
 # Sebo Magic
 
-A collection of small tools for managing photos of products that I made for
-myself.
+A collection of small tools to help me manage the process of taking photos of
+products.
 
 _Sebo_ stands for second-hand book shop in Portuguese.
 
@@ -11,10 +11,10 @@ Assuming you've taken photos of many products, grouped them into folders, and wa
 
 | Command | Description |
 | --- | --- |
-| rename-files | Rename the photos using a sequence of numbers based on the natural sort order of their filenames. |
-| normalize-images | Normalize the format, maximum resolution, and rotation of the photos. |
-| create-cover-images | Automatically create a product cover photo based off of an image from each folder. |
-| count-files | Print the number of photos in each folder in a spreadsheet-friendly way (i.e. using tab separated values). |
+| rename | Rename the photos using a sequence of numbers based on the natural sort order of their filenames. |
+| normalize | Normalize the format, maximum resolution, and rotation of the photos. |
+| create-cover | Automatically create a product cover photo based off of an image from each folder. |
+| count | Print the number of photos in each folder in a spreadsheet-friendly way (i.e. using tab separated values). |
 
 For more details, have a look at [sebo_magic.py](sebo_magic.py) and [test_sebo_magic.py](tests/test_sebo_magic.py).
 
@@ -31,10 +31,10 @@ Options:
   --help           Show this message and exit.
 
 Commands:
-  count-files          Print the number of files that match the given...
-  create-cover-images  Remove the background of, and resize if necessary,...
-  normalize-images     Normalize the format, maximum resolution, and...
-  rename-files         Rename files according to the natural sort order...
+  count         Print the number of files for each folder.
+  create-cover  Remove the background of, and resize if necessary, the...
+  normalize     Normalize the format, maximum resolution, and rotation of...
+  rename        Rename the files using a sequence of numbers based on the...
 ```
 
 ## TODO
