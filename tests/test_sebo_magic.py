@@ -51,7 +51,9 @@ def test_count_files(data_path):
     runner = CliRunner()
     result = runner.invoke(cli, [str(data_path), "count"])
     assert result.exit_code == 0
-    assert result.output == ("book-a\t1\n" "book-a\\book-d\t1\n" "book-b\t3\n")
+    assert "book-a\t1\n" in result.output
+    assert "book-a/book-d\t1\n" in result.output
+    assert "book-b\t3\n" in result.output
 
 
 def test_all_chained(data_path):

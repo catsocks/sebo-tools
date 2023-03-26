@@ -147,4 +147,4 @@ def count(ctx, separator):
         relative_path = path.relative_to(
             base_folder.parent if path == base_folder else base_folder
         )
-        click.echo(separator.join((str(relative_path), str(num_files))))
+        click.echo(separator.join((relative_path.as_posix(), str(num_files))))
