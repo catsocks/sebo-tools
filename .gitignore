@@ -9,3 +9,6 @@ dist/
 
 # Coverage.py
 .coverage
+
+# Python
+__pycache__
