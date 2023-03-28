@@ -10,7 +10,10 @@ from wand.image import Image
 @click.group(chain=True)
 @click.argument("folder", type=click.Path(exists=True))
 @click.option(
-    "--suffixes", multiple=True, default=[".jpg", ".png", ".heic"], show_default=True
+    "--suffixes",
+    multiple=True,
+    default=[".jpg", ".jpeg", ".png", ".heic"],
+    show_default=True,
 )
 @click.pass_context
 def cli(ctx, folder, suffixes):
