@@ -25,7 +25,7 @@ def test_rename_images(data_path):
     assert result.exit_code == 0
     assert (data_path / "book-a" / "2.jpg").exists()
     assert (data_path / "book-a" / "book-d" / "2.jpg").exists()
-    assert (data_path / "book-a" / "book-d" / ".DS_Store").exists()
+    assert (data_path / "book-a" / "book-d" / "Cake recipe.txt").exists()
     assert (data_path / "book-b" / "2.jpg").exists()
     assert (data_path / "book-b" / "3.jpg").exists()
     assert (data_path / "book-b" / "4.heic").exists()
