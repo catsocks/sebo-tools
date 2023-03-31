@@ -146,8 +146,9 @@ def count(ctx, separator):
             if path.is_file():
                 folders[path.parent] = folders.get(path.parent, 0) + 1
 
-    for path, num_files in folders.items():
-        relative_path = path.relative_to(
-            base_folder.parent if path == base_folder else base_folder
+    for folder in natsorted(folders):
+        relative_path = folder.relative_to(
+            base_folder.parent if folder == base_folder else base_folder
         )
+        num_files = folders[folder]
         click.echo(separator.join((relative_path.as_posix(), str(num_files))))
