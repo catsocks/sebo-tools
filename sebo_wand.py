@@ -153,3 +153,15 @@ def count(ctx, separator):
         )
         num_files = folders[folder]
         click.echo(separator.join((relative_path.as_posix(), str(num_files))))
+
+
+@cli.command()
+@click.argument("num-dirs", type=int)
+@click.option("--sequence-start", default=1, show_default=True)
+@click.pass_context
+def mkdirs(ctx, num_dirs, sequence_start):
+    """Create a given number of directories, and name them based on an ascending
+    sequence of numbers, starting from the value of '--sequence-start'."""
+
+    for n in range(sequence_start, sequence_start + num_dirs):
+        (ctx.obj["folder"] / str(n)).mkdir(exist_ok=True)
