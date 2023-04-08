@@ -27,7 +27,7 @@ Commands:
 For more details, have a look at [sebo_wand.py](sebo_wand.py) and
 [test_sebo_wand.py](tests/test_sebo_wand.py).
 
-## TODO
+## To do
 
 * [ ] Add `--verbose` option.
 * [ ] Use a simpler alternative to [rembg](https://github.com/danielgatis/rembg).
