@@ -1,8 +1,9 @@
 # Sebo Magic
 
-A tool for processing photos of products.
+A command-line tool for processing photos, tailored to my very particular
+use-case.
 
-_Sebo_ stands for second-hand book shop in Portuguese.
+_Sebo_ stands for second-hand book store in Portuguese.
 
 ## Usage
 
