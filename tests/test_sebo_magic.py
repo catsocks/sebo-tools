@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 from click.testing import CliRunner
-from numba.core.config import shutil
+import shutil
 
 from sebo_magic import cli
 
