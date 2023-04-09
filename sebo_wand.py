@@ -68,7 +68,7 @@ def rename(ctx, sequence_start):
 @click.option("-f", "--force", is_flag=True)
 @click.pass_context
 def normalize(ctx, format, max_resolution, auto_orient, force):
-    """Normalize the format, maximum resolution, and rotation of images.
+    """Normalize the format, maximum resolution, rotation, and file extension of images.
 
     If a image fits the given normalization criteria, the function will not overwrite it
     unless the '--force' flag is set."""
@@ -95,9 +95,10 @@ def normalize(ctx, format, max_resolution, auto_orient, force):
             if auto_orient and img.orientation not in wand.image.ORIENTATION_TYPES[:2]:
                 img.auto_orient()
 
-            if img.dirty or force:
+            target_suffix = "." + format
+            if path.suffix == target_suffix or img.dirty or force:
                 img.save(filename=path)
-                path.replace(path.with_suffix("." + format))
+                path.replace(path.with_suffix(target_suffix))
 
 
 @cli.command()
