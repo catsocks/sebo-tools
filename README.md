@@ -1,4 +1,4 @@
-# Sebo Magic
+# Sebo wand
 
 A command-line tool for processing photos, tailored to my very particular
 use-case.
@@ -8,7 +8,7 @@ _Sebo_ stands for second-hand book store in Portuguese.
 ## Usage
 
 ```
-Usage: magic [OPTIONS] FOLDER COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
+Usage: wand [OPTIONS] FOLDER COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
   A set of commands that processes files matching the given suffixes in a
   given folder tree.
@@ -24,8 +24,8 @@ Commands:
   rename        Rename the files using a sequence of numbers based on the...
 ```
 
-For more details, have a look at [sebo_magic.py](sebo_magic.py) and
-[test_sebo_magic.py](tests/test_sebo_magic.py).
+For more details, have a look at [sebo_wand.py](sebo_wand.py) and
+[test_sebo_wand.py](tests/test_sebo_wand.py).
 
 ## TODO
 
