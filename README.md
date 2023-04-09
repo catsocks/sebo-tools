@@ -1,7 +1,7 @@
 # Sebo wand
 
-A command-line tool for processing photos, tailored to my very particular
-use-case.
+A command-line tool for organizing and processing photos, tailored to my very
+particular use-case.
 
 _Sebo_ stands for second-hand book store in Portuguese.
 
@@ -10,18 +10,19 @@ _Sebo_ stands for second-hand book store in Portuguese.
 ```
 Usage: wand [OPTIONS] FOLDER COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
 
-  A set of commands that processes files matching the given suffixes in a
-  given folder tree.
+  Commands for organizing and processing files that match '--suffix' in the
+  given folder and its subfolders.
 
 Options:
-  --suffixes TEXT  [default: .jpg, .jpeg, .png, .heic]
-  --help           Show this message and exit.
+  --suffix TEXT  [default: .jpg, .jpeg, .png, .heic]
+  --help         Show this message and exit.
 
 Commands:
-  count         Print the number of files for each folder.
-  create-cover  Remove the background of, and resize if necessary, the...
-  normalize     Normalize the format, maximum resolution, and rotation of...
-  rename        Rename the files using a sequence of numbers based on the...
+  count         Print the number of files in folders.
+  create-cover  Generate the "product cover" version of images.
+  mkdirs        Create a given number of directories.
+  normalize     Normalize images.
+  rename        Rename files using an ascending sequence of numbers.
 ```
 
 For more details, have a look at [sebo_wand.py](sebo_wand.py) and

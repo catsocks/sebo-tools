@@ -10,31 +10,37 @@ from wand.image import Image
 @click.group(chain=True)
 @click.argument("folder", type=click.Path(exists=True))
 @click.option(
-    "--suffixes",
+    "--suffix",
     multiple=True,
     default=[".jpg", ".jpeg", ".png", ".heic"],
     show_default=True,
 )
 @click.pass_context
-def cli(ctx, folder, suffixes):
-    """A set of commands that processes files matching the given suffixes in a given
-    folder tree."""
+def cli(ctx, folder, suffix):
+    """Commands for organizing and processing files that match '--suffix' in the
+    given folder and its subfolders.
+    """
 
     ctx.ensure_object(dict)
     ctx.obj["folder"] = Path(folder)
-    ctx.obj["suffixes"] = suffixes
+    ctx.obj["suffix"] = suffix
 
 
 @cli.command()
 @click.option("--sequence-start", default=2, show_default=True)
 @click.pass_context
 def rename(ctx, sequence_start):
-    """Rename the files using a sequence of numbers based on the natural sort order
-    of their filenames, starting from the value of '--sequence-start'."""
+    """Rename files using an ascending sequence of numbers.
+
+    The order which a file is assigned a number from the sequence is determined by
+    their natural sort order in their parent folder.
+
+    The sequence starts from the value of '--sequence-start' for every folder.
+    """
 
     files = []
     for path in ctx.obj["folder"].rglob("*"):
-        if path.is_file() and path.suffix in ctx.obj["suffixes"]:
+        if path.is_file() and path.suffix in ctx.obj["suffix"]:
             files.append(path)
 
     folders = {}
@@ -68,16 +74,19 @@ def rename(ctx, sequence_start):
 @click.option("-f", "--force", is_flag=True)
 @click.pass_context
 def normalize(ctx, format, max_resolution, auto_orient, force):
-    """Normalize the format, maximum resolution, rotation, and file extension of images.
+    """Normalize images.
+
+    The format, maximum resolution, rotation, and file extension will be normalized.
 
     If a image fits the given normalization criteria, the function will not overwrite it
-    unless the '--force' flag is set."""
+    unless the '--force' flag is set.
+    """
 
     for path in ctx.obj["folder"].rglob("*"):
         if not path.is_file():
             continue
 
-        if path.suffix not in ctx.obj["suffixes"]:
+        if path.suffix not in ctx.obj["suffix"]:
             continue
 
         with Image(filename=path) as img:
@@ -108,11 +117,13 @@ def normalize(ctx, format, max_resolution, auto_orient, force):
 @click.option("-f", "--force", is_flag=True)
 @click.pass_context
 def create_cover(ctx, input, output, max_resolution, force):
-    """Remove the background of, and resize if necessary, the images that match the
-    given input path, saving them at the given output path relative to the folder
-    they're in.
+    """Generate the "product cover" version of images.
 
-    If the output file already exists, the function will not overwrite it unless the
+    Remove the background of, and resize if necessary, images that match the given
+    '--input' path relative to their parent folder. The new images will be saved at the
+    given '--output' path relative to their parent folder.
+
+    If a file already exists at an output path, it will not be overwriten unless the
     '--force' flag is set.
     """
 
@@ -137,13 +148,15 @@ def create_cover(ctx, input, output, max_resolution, force):
 @click.option("--separator", default="\t")
 @click.pass_context
 def count(ctx, separator):
-    """Print the number of files for each folder. Only files whose suffix match
-    '--suffixes' are counted."""
+    """Print the number of files in folders.
+
+    The given folder and all of its subfolders are included. And **only** files whose
+    suffix match '--suffix' are counted."""
 
     base_folder = ctx.obj["folder"]
     folders = {}
     for path in base_folder.rglob("*"):
-        if path.suffix in ctx.obj["suffixes"]:
+        if path.suffix in ctx.obj["suffix"]:
             if path.is_file():
                 folders[path.parent] = folders.get(path.parent, 0) + 1
 
@@ -160,8 +173,12 @@ def count(ctx, separator):
 @click.option("--sequence-start", default=1, show_default=True)
 @click.pass_context
 def mkdirs(ctx, num_dirs, sequence_start):
-    """Create a given number of directories, and name them based on an ascending
-    sequence of numbers, starting from the value of '--sequence-start'."""
+    """Create a given number of directories.
+
+    The folders will be created at the root of the given folder, and they will be
+    named them based on an ascending sequence of numbers starting from the value of
+    '--sequence-start'.
+    """
 
     for n in range(sequence_start, sequence_start + num_dirs):
         (ctx.obj["folder"] / str(n)).mkdir(exist_ok=True)
