@@ -34,6 +34,10 @@ For more details, have a look at [sebo_wand.py](sebo_wand.py) and
 * [ ] Add command for grouping photos of the same object into folders.
 * [ ] Add command for scraping the text contents of all the photos.
 
+## My related projects
+
+- [Sebo inventory](https://github.com/catsocks/sebo-inventory-gs) Google Apps Script
+
 ## License
 
 Read the [BSD-0](LICENSE.txt) license.
