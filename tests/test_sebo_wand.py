@@ -19,7 +19,7 @@ def test_cli_no_args():
     assert result.exit_code == 0
 
 
-def test_rename_images(data_path):
+def test_rename(data_path):
     runner = CliRunner()
     result = runner.invoke(cli, [str(data_path), "rename"])
     assert result.exit_code == 0
@@ -31,7 +31,7 @@ def test_rename_images(data_path):
     assert (data_path / "book-b" / "4.heic").exists()
 
 
-def test_normalize_images(data_path):
+def test_normalize(data_path):
     runner = CliRunner()
     book_path = data_path / "book-b"
     result = runner.invoke(cli, [str(book_path), "normalize"])
@@ -39,7 +39,7 @@ def test_normalize_images(data_path):
     assert (book_path / "3.jpg").exists()
 
 
-def test_create_cover_images(data_path):
+def test_create_cover(data_path):
     runner = CliRunner()
     book_path = data_path / "book-b"
     result = runner.invoke(cli, [str(book_path), "create-cover"])
@@ -47,7 +47,7 @@ def test_create_cover_images(data_path):
     assert (book_path / "1.png").exists()
 
 
-def test_count_files(data_path):
+def test_count(data_path):
     runner = CliRunner()
     result = runner.invoke(cli, [str(data_path), "count"])
     assert result.exit_code == 0
