@@ -28,6 +28,12 @@ Commands:
 For more details, have a look at [sebo_wand.py](sebo_wand.py) and
 [test_sebo_wand.py](tests/test_sebo_wand.py).
 
+## Develop
+
+In case you're on Fedora Linux,
+[Remi's RPM repository](https://rpms.remirepo.net/) provide HEIC support for
+ImageMagick through the _ImageMagick-heic_ package.
+
 ## To do
 
 * [ ] Add `--verbose` option.
@@ -37,7 +43,7 @@ For more details, have a look at [sebo_wand.py](sebo_wand.py) and
 
 ## My related projects
 
-- [Sebo inventory](https://github.com/catsocks/sebo-inventory-gs) Google Apps Script
+- [Sebo inventory](https://github.com/catsocks/sebo-inventory-gs) Google Apps Script project
 
 ## License
 
