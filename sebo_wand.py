@@ -105,7 +105,7 @@ def normalize(ctx, format, max_resolution, auto_orient, force):
                 img.auto_orient()
 
             target_suffix = "." + format
-            if path.suffix == target_suffix or img.dirty or force:
+            if path.suffix != target_suffix or img.dirty or force:
                 img.save(filename=path)
                 path.replace(path.with_suffix(target_suffix))
 
