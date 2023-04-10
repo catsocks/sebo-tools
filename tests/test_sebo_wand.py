@@ -27,7 +27,7 @@ def test_rename(data_path):
     assert (data_path / "book-a" / "book-d" / "2.jpg").exists()
     assert (data_path / "book-a" / "book-d" / "Cake recipe.txt").exists()
     assert (data_path / "book-b" / "2.jpg").exists()
-    assert (data_path / "book-b" / "3.jpg").exists()
+    assert (data_path / "book-b" / "3.jpeg").exists()
     assert (data_path / "book-b" / "4.heic").exists()
 
 
@@ -36,7 +36,8 @@ def test_normalize(data_path):
     book_path = data_path / "book-b"
     result = runner.invoke(cli, [str(book_path), "normalize"])
     assert result.exit_code == 0
-    assert (book_path / "3.jpg").exists()
+    assert next(book_path.glob("*.jpeg"), None) is None
+    assert next(book_path.glob("*.heic"), None) is None
 
 
 def test_create_cover(data_path):
