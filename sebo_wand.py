@@ -151,7 +151,8 @@ def count(ctx, separator):
     """Print the number of files in folders.
 
     The given folder and all of its subfolders are included. And **only** files whose
-    suffix match '--suffix' are counted."""
+    suffix match '--suffix' are counted.
+    """
 
     base_folder = ctx.obj["folder"]
     folders = {}
