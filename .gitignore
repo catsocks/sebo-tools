@@ -1,6 +1,7 @@
 # catsocks
 NOTES.md
 README.html
+*.sublime-*
 
 # Poetry
 dist/
