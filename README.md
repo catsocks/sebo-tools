@@ -1,66 +1,171 @@
-# Sebo wand
+# Sebo tools
 
-A command-line tool for organizing and processing photos, tailored to my very
-particular use-case.
+A package of command-line tools for organizing and processing photos, tailored
+to my very particular use-case.
 
 _Sebo_ stands for second-hand book store in Portuguese.
 
+## Summary
+
+- _sebo-mkdirs_ — Create a given number of folders.
+- _sebo-rename_ — Rename files using an ascending sequence of numbers.
+- _sebo-imgnorm_ — Normalize images in place.
+- _sebo-covergen_ — Generate product cover images.
+- _sebo-count_ — Count the number of files in folders.
+
+The tools are listed in the order which I would normally use them.
+
 ## Usage
 
-```
-Usage: wand [OPTIONS] FOLDER COMMAND1 [ARGS]... [COMMAND2 [ARGS]...]...
+### sebo-mkdirs
 
-  Commands for organizing and processing files that match '--suffix' in the
-  given folder and its subfolders.
+```
+Usage: sebo-mkdirs [OPTIONS] FOLDER NUMBER
+
+  Create a given number of folders.
+
+  The folders will be named using an ascending sequence of numbers starting
+  from 1 or '--sequence-start' or the greatest integer used as the name of a
+  subfolder.
 
 Options:
-  --suffix TEXT  [default: .jpg, .jpeg, .png, .heic]
-  --help         Show this message and exit.
-
-Commands:
-  count         Print the number of files in folders.
-  create-cover  Generate the "product cover" version of images.
-  mkdirs        Create a given number of directories.
-  normalize     Normalize images.
-  rename        Rename files using an ascending sequence of numbers.
+  --sequence-start INTEGER
+  --help                    Show this message and exit.
 ```
 
-For more details, have a look at [sebo_wand.py](sebo_wand.py) and
-[test_sebo_wand.py](tests/test_sebo_wand.py).
+### sebo-rename
+
+```
+Usage: sebo-rename [OPTIONS] [FOLDER]
+
+  Rename files using an ascending sequence of numbers.
+
+  Applies to both the given folder and its subfolders.
+
+  The order in which the files are named is determined by their natural sort
+  order within their parent folder.
+
+  The sequence is reset for every folder and begins with the value specified
+  by '--sequence-start'.
+
+Options:
+  -v, --verbose
+  --no-recursive
+  --dry-run
+  --sequence-start INTEGER  [default: 2]
+  --help                    Show this message and exit.
+```
+
+### sebo-imgnorm
+
+```
+Usage: sebo-imgnorm [OPTIONS] [FOLDER]
+
+  Normalize images in place.
+
+  Normalize the file extension, format, maximum resolution, and orientation of
+  images at the given folder and subfolders.
+
+  If an image does not need to be normalized, the function will not overwrite
+  it unless the '--force' flag is set.
+
+Options:
+  --no-recursive
+  -f, --force
+  -v, --verbose
+  --dry-run
+  --format TEXT          Image format.  [default: jpg]
+  --extension TEXT       File extension.  [default: jpg]
+  --max-resolution TEXT  [default: 1920x1920]
+  --help                 Show this message and exit.
+```
+
+### sebo-covergen
+
+```
+Usage: sebo-covergen [OPTIONS] [FOLDER] COMMAND [ARGS]...
+
+  Generate product cover images.
+
+  Search for images that match '--input' at the given folder and subfolders.
+
+  For each matching image, the background is removed, it is scaled down if
+  necessary to fit '--max-resolution', and then it is saved to '--output'.
+
+  The output file will not be overwriten unless the '--force' flag is set.
+
+Options:
+  --no-recursive
+  -f, --force
+  -v, --verbose
+  --dry-run
+  -i, --input TEXT          [default: 2.jpg]
+  -o, --output TEXT         [default: 1.png]
+  --max-resolution TEXT     [default: 1920x1920]
+  --use-remove-bg
+  --use-rembg
+  --remove-bg-api-key TEXT
+  --help                    Show this message and exit.
+```
+
+### sebo-count
+
+```
+Usage: sebo-count [OPTIONS] [FOLDER]
+
+  Count the number of files in folders.
+
+  The number of files at the given folder and subfolders will be printed beside
+  their path relative to the given folder.
+
+Options:
+  --no-recursive
+  --separator TEXT
+  --help            Show this message and exit.
+```
 
 ## Install
 
-The requirements are:
+### Requirements
 
 - Python 3.10
-- [ImageMagick](https://imagemagick.org/index.php) with HEIC support
 
-Install using [pipx](https://pypa.github.io/pipx/) (recommended), pip or
-[Poetry](https://python-poetry.org/):
+The _covergen_ tool will use the remove.bg paid API — which comes with some
+"Free Previews" — by default, and it requires an account:
 
-- `pipx install .` — uses an isolated environment, _wand_ will be added to a
-location on _PATH_
-- `pip install .` — uses the global _site-packages_
-- `poetry install` — uses an isolated environment, suitable for development
+- [remove.bg](https://www.remove.bg/r/mYdNF6r5sTTkcp5zYn8Utz5G) API key
 
-### Fedora Linux
+Alternatively, make sure to install this package with the free and offline
+background remover [_rembg_](https://github.com/danielgatis/rembg) and pass the
+flag `--use-rembg` to _covergen_.
 
-In case you're on Fedora Linux,
-[Remi's RPM repository](https://rpms.remirepo.net/) provide HEIC support for
-ImageMagick through the _ImageMagick-heic_ package.
+I've made _rembg_ optional due to installation and performance issues.
 
-## To do
+#### Development
 
-* [ ] Add `--verbose` option.
-* [ ] Use a simpler alternative to
-[rembg](https://github.com/danielgatis/rembg).
-* [ ] Add command for grouping photos of the same object into folders.
-* [ ] Add command for scraping the text contents of all the photos.
+- [Poetry](https://python-poetry.org/) dependency manager
 
-## My related projects
+### Install as an user
 
-- [Sebo inventory](https://github.com/catsocks/sebo-inventory-gs) Google Apps
-Script project
+Install this package into an isolated environment using
+[pipx](https://pypa.github.io/pipx/):
+
+    pipx install .[rembg]
+
+Alternatively, use pip:
+
+    pip install .[rembg]
+
+The tools should now be available with their sebo-prefixed names.
+
+### Install as a developer
+
+Install this package with all optional dependencies into a virtual environment:
+
+    poetry install --all-extras
+
+Alternatively, omit `--all-extras` in case you run into issues installing
+_rembg_.
 
 ## License
 
