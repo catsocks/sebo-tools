@@ -1,9 +1,9 @@
 # Sebo tools
 
 A package of command-line tools for organizing and processing photos, tailored
-to my very particular use-case.
+to my very particular use case.
 
-_Sebo_ stands for second-hand book store in Portuguese.
+_Sebo_ stands for second hand book store in Portuguese.
 
 ## Summary
 
