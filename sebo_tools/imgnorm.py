@@ -13,7 +13,7 @@ from . import validate_resolution
 @click.option("-f", "--force", is_flag=True)
 @click.option("-v", "--verbose", is_flag=True)
 @click.option("--dry-run", is_flag=True)
-@click.option("--format", default="jpg", show_default=True, help="Image format.")
+@click.option("--format", default="jpeg", show_default=True, help="Image format.")
 @click.option("--extension", default="jpg", show_default=True, help="File extension.")
 @click.option(
     "--max-resolution",
@@ -43,32 +43,33 @@ def cli(folder, no_recursive, force, verbose, dry_run, **kwargs):
         if not path.is_file():
             continue
 
-        dry_run_changes = []
-        with Image(filename=path) as img:
-            if img.format != kwargs["format"]:
-                dry_run_changes.append("format")
-            img.format = kwargs["format"]
+        dry_run_actions = []
+        with Image(filename=path) as original:
+            with original.convert(kwargs["format"]) as img:
+                if img.width > max_width or img.height > max_height:
+                    img.transform(resize=f"{max_width}x{max_height}>")
+                    dry_run_actions.append("shrink")
 
-            if img.width > max_width or img.height > max_height:
-                img.transform(resize=f"{max_width}x{max_height}>")
-                dry_run_changes.append("max resolution")
+                if img.orientation not in ["undefined", "top_left"]:
+                    img.auto_orient()
+                    dry_run_actions.append("rotate")
 
-            if img.orientation not in ["undefined", "top_left"]:
-                img.auto_orient()
-                dry_run_changes.append("rotation")
+                is_format_different = original.format != img.format
+                if is_format_different:
+                    dry_run_actions.append(f"convert format from {original.format} to "
+                        + str(img.format))
 
-            expected_suffix = "." + kwargs["extension"]
-            if path.suffix != expected_suffix:
-                dry_run_changes.append("file extension")
+                if is_format_different or img.dirty or force:
+                    if not dry_run:
+                        img.save(filename=path)
 
-            if dry_run or verbose:
-                changes_list = ", ".join(dry_run_changes)
-                click.echo(f"Change {changes_list} for image: {path}")
-                if dry_run:
-                    continue
-
-            if img.dirty or force:
-                img.save(filename=path)
-
-            if path.suffix != expected_suffix:
+        expected_suffix = "." + kwargs["extension"]
+        if path.suffix != expected_suffix:
+            if not dry_run:
                 path.replace(path.with_suffix(expected_suffix))
+            dry_run_actions.append(f"change suffix from {path.suffix} to " 
+                + expected_suffix)
+
+        if (dry_run or verbose) and dry_run_actions:
+            msg = ", ".join(dry_run_actions).capitalize()
+            click.echo(f"{msg}: {path}")
