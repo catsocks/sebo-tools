@@ -20,16 +20,16 @@ The tools are listed in the order which I would normally use them.
 ### sebo-mkdirs
 
 ```
-Usage: sebo-mkdirs [OPTIONS] FOLDER NUMBER
+Usage: sebo-mkdirs [OPTIONS] NUMBER
 
   Create a given number of folders.
 
   The folders will be named using an ascending sequence of numbers starting
-  from 1 or '--sequence-start' or the greatest integer used as the name of a
-  subfolder.
+  from either '--start-from', the greatest integer used as the name of a
+  subfolder, or 1.
 
 Options:
-  --sequence-start INTEGER
+  -s, --start-from INTEGER
   --help                    Show this message and exit.
 ```
 

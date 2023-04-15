@@ -4,21 +4,22 @@ import click
 
 
 @click.command()
-@click.argument("folder", type=click.Path(exists=True, path_type=Path))
 @click.argument("number", type=int)
-@click.option("--sequence-start", type=int)
-def cli(folder, number, sequence_start):
+@click.option("-s", "--start-from", type=int)
+def cli(number, start_from):
     """Create a given number of folders.
 
-    The folders will be named using an ascending sequence of numbers starting from 1 or
-    '--sequence-start' or the greatest integer used as the name of a subfolder.
+    The folders will be named using an ascending sequence of numbers starting from
+    either '--start-from', the greatest integer used as the name of a subfolder, or 1.
     """
 
-    if sequence_start is None:
-        sequence_start = 1
+    folder = Path(".")
+
+    if start_from is None:
+        start_from = 1
         for path in folder.glob("*"):
             if path.is_dir() and path.stem.isdigit():
-                sequence_start = max(int(path.stem), sequence_start)
+                start_from = max(int(path.stem) + 1, start_from)
 
-    for n in range(sequence_start, sequence_start + number):
-        (folder / str(n)).mkdir(exist_ok=True)
+    for folder_number in range(start_from, start_from + number):
+        (folder / str(folder_number)).mkdir(exist_ok=True)
