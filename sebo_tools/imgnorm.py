@@ -53,14 +53,13 @@ def cli(folder, no_recursive, force, verbose, dry_run, **kwargs):
                 img.transform(resize=f"{max_width}x{max_height}>")
                 dry_run_changes.append("max resolution")
 
-            needs_rotation = img.orientation not in wand.image.ORIENTATION_TYPES[:2]
-            if needs_rotation:
+            if img.orientation not in ["undefined", "top_left"]:
                 img.auto_orient()
                 dry_run_changes.append("rotation")
 
             expected_suffix = "." + kwargs["extension"]
             if path.suffix != expected_suffix:
-                dry_run_changes.append("extension")
+                dry_run_changes.append("file extension")
 
             if dry_run or verbose:
                 changes_list = ", ".join(dry_run_changes)

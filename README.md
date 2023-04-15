@@ -129,6 +129,7 @@ Options:
 ### Requirements
 
 - Python 3.10
+- [ImageMagick](https://imagemagick.org/)
 
 The _covergen_ tool will use the remove.bg paid API — which comes with some
 "Free Previews" — by default, and it requires an account:
@@ -144,6 +145,7 @@ I've made _rembg_ optional due to installation and performance issues.
 #### Development
 
 - [Poetry](https://python-poetry.org/) dependency manager
+- ImageMagick _with HEIC support_
 
 ### Install as an user
 
@@ -166,6 +168,12 @@ Install this package with all optional dependencies into a virtual environment:
 
 Alternatively, omit `--all-extras` in case you run into issues installing
 _rembg_.
+
+#### On Fedora Linux
+
+The ImageMagick and _ImageMagick-heic_ packages from
+[Remi's RPM repository](https://rpms.remirepo.net/) provide ImageMagick with
+HEIC support.
 
 ## License
 
