@@ -128,7 +128,9 @@ Options:
 
 ### Requirements
 
-- Python 3.10
+- Python 3.10 — you can use [pyenv](https://github.com/pyenv/pyenv) on Linux and
+macOS to install Python 3.10 just for this project
+
 - [ImageMagick](https://imagemagick.org/)
 
 The _covergen_ tool will use the remove.bg paid API — which comes with some
