@@ -14,3 +14,6 @@ dist/
 
 # Python
 __pycache__
+
+# Pyright
+pyrightconfig.json
