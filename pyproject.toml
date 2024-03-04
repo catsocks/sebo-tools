@@ -1,43 +1,29 @@
 [tool.poetry]
-name = "sebo-tools"
+name = "moth"
 version = "0.1.0"
 description = ""
-authors = ["catsocks <3389801+catsocks@users.noreply.github.com>"]
+authors = ["Your Name <you@example.com>"]
 readme = "README.md"
-packages = [{include = "sebo_tools"}]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.11"
-Wand = "^0.6.11" # ImageMagick bindings
-click = "^8.1.3" # CLI framework
-natsort = "^8.3.1" # natural sort order version of built-in sorted
-requests = "^2.28.2" # for online background removal services
-rembg = {version = "^2.0.30", optional = true} # image background removal 
+python = "^3.11"
+pillow = "^10.2.0" # pillow over Wand because of no external dependencies
+natsort = "^8.4.0" # natural sort order version of built-in sorted
+requests = "^2.31.0" # for online background removal
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.1.0" # code formatter
-ruff = "^0.0.253" # linter
-isort = "^5.12.0" # sort imports
-pytest = "^7.2.2"
-pytest-order = "^1.1.0"
-coverage = "^7.2.1" # code coverage
+black = "^24.2.0" # formatter
+ruff = "^0.3.0" # linter
+isort = "^5.13.2" # import sorter
 poethepoet = "^0.18.1" # task runner
 
-[tool.poetry.extras]
-rembg = ["rembg"]
-
 [tool.poetry.scripts]
-sebo-count = "sebo_tools.count:cli"
-sebo-covergen = "sebo_tools.covergen:cli"
-sebo-mkdirs = "sebo_tools.mkdirs:cli"
-sebo-imgnorm = "sebo_tools.imgnorm:cli"
-sebo-rename = "sebo_tools.rename:cli"
-
-[tool.pytest.ini_options]
-# https://docs.pytest.org/en/7.1.x/explanation/pythonpath.html#import-modes
-addopts = [
-    "--import-mode=importlib",
-]
+moth-count = "moth.count:main"
+moth-covergen = "moth.covergen:main"
+moth-mkdirs = "moth.mkdirs:main"
+moth-imgnorm = "moth.imgnorm:main"
+moth-rename = "moth.rename:main"
+moth-thumbgen = "moth.thumbgen:main"
 
 [tool.isort]
 profile = "black"
@@ -47,7 +33,6 @@ black = "black ."
 isort = "isort ."
 fmt = ["black", "isort"]
 lint = "ruff check ."
-coverage =  "coverage run -m pytest"
 
 [build-system]
 requires = ["poetry-core"]
